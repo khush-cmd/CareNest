@@ -1,30 +1,17 @@
-import { useEffect, useState } from "react";
-import PatientForm from "./patient/patientForm";
-
-
+import React from 'react'
+import PatientForm from './patient/patientForm';
+import MyProfile from './patient/MyProfile';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
 const App = () => {
-  const [message,setMessage] = useState("");
-
-  useEffect(() => {
-    
-    const fetchHealth = async () => {
-      try{
-        const response = await fetch("http://localhost:3001/api/health");
-        const data = await response.json();
-        setMessage(data.message);
-      }
-      catch(err){
-        console.log(err);
-      }
-    }
-    fetchHealth();
-},[])
   return (
-    <div>
-      <h1>CareNest</h1>
-      <p>{message}</p>
-      <PatientForm/>
-    </div>
+
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<PatientForm/>} />
+      <Route path="/profile" element={<MyProfile/>} />
+    </Routes>
+    </BrowserRouter>
+    
   )
 }
 export default App;
